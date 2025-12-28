@@ -12,7 +12,7 @@ const mockProducts = [
     price: 299.99,
     sizes: ['7','8','9','10','11'],
     stock: 20,
-    image_url: 'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    image_url: 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
     description: 'Experience unparalleled speed and agility with the Nike Mercurial Superfly 9 Elite. Designed for elite players who demand the best in performance and style.'
   },
   {
@@ -37,123 +37,273 @@ const mockProducts = [
   },
   {
     id: 4,
-    name: 'Barcelona Home Jersey 2024',
-    category: 'jerseys',
-    price: 89.99,
-    sizes: ['S','M','L','XL','XXL'],
-    stock: 25,
-    image_url: 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
-    description: 'Show your support for FC Barcelona with the official 2024 home jersey. Classic stripes and premium quality.'
-  },
-  {
-    id: 5,
-    name: 'Real Madrid Away Jersey 2024',
-    category: 'jerseys',
-    price: 94.99,
-    sizes: ['S','M','L','XL','XXL'],
-    stock: 22,
-    image_url: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
-    description: 'Represent Real Madrid in style with the 2024 away jersey. Sleek design and comfortable fit.'
-  },
-  {
-    id: 6,
-    name: 'Nike Phantom GX Elite',
-    category: 'boots',
-    price: 279.99,
-    sizes: ['7','8','9','10','11'],
-    stock: 12,
-    image_url: 'https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
-    description: 'Dominate the pitch with the Nike Phantom GX Elite. Advanced grip and precision for the ultimate control.'
-  },
-  {
-    id: 7,
-    name: 'Adidas X Speedportal',
-    category: 'boots',
-    price: 259.99,
-    sizes: ['7','8','9','10','11'],
-    stock: 16,
-    image_url: 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
-    description: 'Speed and agility redefined. The Adidas X Speedportal offers explosive acceleration and superior comfort.'
-  },
-  {
-    id: 8,
-    name: 'Puma Ultra Ultimate',
-    category: 'boots',
-    price: 239.99,
-    sizes: ['7','8','9','10','11'],
-    stock: 14,
-    image_url: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
-    description: 'Elevate your game with Puma Ultra Ultimate. Soft touch and exceptional ball control for every player.'
-  },
-  {
-    id: 9,
-    name: 'Manchester United Home Jersey 2024',
-    category: 'jerseys',
-    price: 99.99,
-    sizes: ['S','M','L','XL','XXL'],
-    stock: 30,
-    image_url: 'https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
-    description: 'Wear the pride of Manchester United with the 2024 home jersey. Iconic red and premium materials.'
-  },
-  {
-    id: 10,
-    name: 'Liverpool Away Jersey 2024',
-    category: 'jerseys',
-    price: 89.99,
-    sizes: ['S','M','L','XL','XXL'],
-    stock: 28,
-    image_url: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
-    description: 'Support Liverpool with the 2024 away jersey. Sleek design and comfortable fit for the passionate fan.'
-  },
-  {
-    id: 11,
-    name: 'Chelsea Third Jersey 2024',
-    category: 'jerseys',
-    price: 94.99,
-    sizes: ['S','M','L','XL','XXL'],
-    stock: 20,
-    image_url: 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
-    description: 'Stand out with Chelsea\'s 2024 third jersey. Unique colors and high-quality fabric.'
-  },
-  {
-    id: 12,
-    name: 'Nike Tiempo Legend 9 Elite',
-    category: 'boots',
-    price: 269.99,
-    sizes: ['7','8','9','10','11'],
-    stock: 10,
-    image_url: 'https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
-    description: 'Classic style meets modern performance. The Nike Tiempo Legend 9 Elite for the discerning player.'
-  },
-  {
-    id: 13,
-    name: 'Adidas Copa Mundial',
+    name: 'New Balance Tekela Pro',
     category: 'boots',
     price: 199.99,
     sizes: ['7','8','9','10','11'],
+    stock: 12,
+    image_url: 'https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Precision and control meet innovation in the New Balance Tekela Pro. Perfect for technical players.'
+  },
+  {
+    id: 5,
+    name: 'Under Armour Magnetico Pro 3',
+    category: 'boots',
+    price: 189.99,
+    sizes: ['7','8','9','10','11'],
+    stock: 16,
+    image_url: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Dominate the pitch with Under Armour Magnetico Pro 3. Superior grip and stability for every move.'
+  },
+  {
+    id: 6,
+    name: 'Barcelona Home Jersey 2024-2025',
+    category: 'jerseys',
+    price: 650.00,
+    sizes: ['S','M','L','XL','XXL'],
     stock: 25,
+    image_url: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Show your support for FC Barcelona with the official 2024-2025 home jersey. Classic blaugrana stripes and premium quality fabric.'
+  },
+  {
+    id: 7,
+    name: 'Barcelona Away Jersey 2024-2025',
+    category: 'jerseys',
+    price: 650.00,
+    sizes: ['S','M','L','XL','XXL'],
+    stock: 25,
+    image_url: 'https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Represent Barcelona in their sleek away jersey. Modern design with excellent comfort and club pride.'
+  },
+  {
+    id: 8,
+    name: 'Real Madrid Home Jersey 2024-2025',
+    category: 'jerseys',
+    price: 750.00,
+    sizes: ['S','M','L','XL','XXL'],
+    stock: 25,
+    image_url: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Wear the legendary Real Madrid home jersey. Iconic white with royal details and premium craftsmanship.'
+  },
+  {
+    id: 9,
+    name: 'Real Madrid Away Jersey 2024-2025',
+    category: 'jerseys',
+    price: 750.00,
+    sizes: ['S','M','L','XL','XXL'],
+    stock: 22,
     image_url: 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
-    description: 'Timeless elegance with the Adidas Copa Mundial. Perfect for players who value tradition and touch.'
+    description: 'Stand out in Real Madrid away colors. Sophisticated design for the most successful club in history.'
+  },
+  {
+    id: 10,
+    name: 'Kaizer Chiefs Home Jersey 2024-2025',
+    category: 'jerseys',
+    price: 650.00,
+    sizes: ['S','M','L','XL','XXL'],
+    stock: 30,
+    image_url: 'https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Support the mighty Kaizer Chiefs with their iconic gold and black home jersey. Premium quality for passionate Amakhosi fans.'
+  },
+  {
+    id: 11,
+    name: 'Kaizer Chiefs Away Jersey 2024-2025',
+    category: 'jerseys',
+    price: 650.00,
+    sizes: ['S','M','L','XL','XXL'],
+    stock: 28,
+    image_url: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Stand out in the Kaizer Chiefs away jersey. Modern design with excellent comfort and Amakhosi pride.'
+  },
+  {
+    id: 12,
+    name: 'Orlando Pirates Home Jersey 2024-2025',
+    category: 'jerseys',
+    price: 650.00,
+    sizes: ['S','M','L','XL','XXL'],
+    stock: 26,
+    image_url: 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Show your Buccaneer spirit with the Orlando Pirates home jersey. Black and white stripes for the legendary Sea Robbers.'
+  },
+  {
+    id: 13,
+    name: 'Orlando Pirates Away Jersey 2024-2025',
+    category: 'jerseys',
+    price: 650.00,
+    sizes: ['S','M','L','XL','XXL'],
+    stock: 24,
+    image_url: 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Represent Orlando Pirates away from home with this sleek alternative jersey design and Buccaneer pride.'
   },
   {
     id: 14,
-    name: 'Puma King Ultimate',
-    category: 'boots',
-    price: 219.99,
-    sizes: ['7','8','9','10','11'],
-    stock: 18,
-    image_url: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
-    description: 'Rule the field with Puma King Ultimate. Superior grip and control for indoor and outdoor play.'
+    name: 'Mamelodi Sundowns Home Jersey 2024-2025',
+    category: 'jerseys',
+    price: 750.00,
+    sizes: ['S','M','L','XL','XXL'],
+    stock: 27,
+    image_url: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Wear the pride of Mamelodi Sundowns with their distinctive yellow and blue home jersey. Champions quality.'
   },
   {
     id: 15,
-    name: 'Arsenal Home Jersey 2024',
+    name: 'Mamelodi Sundowns Away Jersey 2024-2025',
     category: 'jerseys',
-    price: 89.99,
+    price: 750.00,
     sizes: ['S','M','L','XL','XXL'],
-    stock: 24,
+    stock: 25,
+    image_url: 'https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'The Brazilians away jersey combines style and performance for Sundowns supporters and PSL champions.'
+  },
+  {
+    id: 16,
+    name: 'Manchester City Home Jersey 2024-2025',
+    category: 'jerseys',
+    price: 750.00,
+    sizes: ['S','M','L','XL','XXL'],
+    stock: 20,
+    image_url: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Join the Cityzens with the official Manchester City home jersey. Sky blue excellence and Premier League quality.'
+  },
+  {
+    id: 17,
+    name: 'Manchester City Away Jersey 2024-2025',
+    category: 'jerseys',
+    price: 750.00,
+    sizes: ['S','M','L','XL','XXL'],
+    stock: 18,
+    image_url: 'https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Stand out in black and white with the Manchester City away jersey. Premium Premier League craftsmanship.'
+  },
+  {
+    id: 18,
+    name: 'Manchester United Home Jersey 2024-2025',
+    category: 'jerseys',
+    price: 750.00,
+    sizes: ['S','M','L','XL','XXL'],
+    stock: 25,
+    image_url: 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Wear the famous Manchester United home jersey. Red devil pride with legendary club heritage.'
+  },
+  {
+    id: 19,
+    name: 'Manchester United Away Jersey 2024-2025',
+    category: 'jerseys',
+    price: 750.00,
+    sizes: ['S','M','L','XL','XXL'],
+    stock: 25,
+    image_url: 'https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Represent Man United in their away colors. Modern design for the most successful club in English football.'
+  },
+  {
+    id: 20,
+    name: 'Arsenal Home Jersey 2024-2025',
+    category: 'jerseys',
+    price: 650.00,
+    sizes: ['S','M','L','XL','XXL'],
+    stock: 25,
+    image_url: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Support the Gunners with the Arsenal home jersey. Classic red and white with north London pride.'
+  },
+  {
+    id: 21,
+    name: 'Arsenal Away Jersey 2024-2025',
+    category: 'jerseys',
+    price: 650.00,
+    sizes: ['S','M','L','XL','XXL'],
+    stock: 25,
+    image_url: 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Stand out in Arsenal away colors. Sleek design for Emirates Stadium heroes.'
+  },
+  {
+    id: 22,
+    name: 'Liverpool Home Jersey 2024-2025',
+    category: 'jerseys',
+    price: 750.00,
+    sizes: ['S','M','L','XL','XXL'],
+    stock: 25,
+    image_url: 'https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Wear the legendary Liverpool home jersey. Red pride for Anfield and You Will Never Walk Alone.'
+  },
+  {
+    id: 23,
+    name: 'Liverpool Away Jersey 2024-2025',
+    category: 'jerseys',
+    price: 750.00,
+    sizes: ['S','M','L','XL','XXL'],
+    stock: 25,
     image_url: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
-    description: 'Show your Arsenal spirit with the 2024 home jersey. Classic red and white with modern comfort.'
+    description: 'Represent Liverpool away from home. Modern design for the most decorated club in English football.'
+  },
+  {
+    id: 24,
+    name: 'Chelsea Home Jersey 2024-2025',
+    category: 'jerseys',
+    price: 650.00,
+    sizes: ['S','M','L','XL','XXL'],
+    stock: 25,
+    image_url: 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Show your Chelsea pride with the home jersey. Blue excellence from Stamford Bridge.'
+  },
+  {
+    id: 25,
+    name: 'Chelsea Away Jersey 2024-2025',
+    category: 'jerseys',
+    price: 650.00,
+    sizes: ['S','M','L','XL','XXL'],
+    stock: 25,
+    image_url: 'https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Stand out in Chelsea away colors. Premium quality for Premier League champions.'
+  },
+  {
+    id: 26,
+    name: 'Nike Shin Guards Pro',
+    category: 'accessories',
+    price: 39.99,
+    sizes: ['S','M','L'],
+    stock: 40,
+    image_url: 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Protect your legs with Nike Shin Guards Pro. Lightweight and comfortable protection for serious players.'
+  },
+  {
+    id: 27,
+    name: 'Adidas Training Ball',
+    category: 'accessories',
+    price: 49.99,
+    sizes: ['5'],
+    stock: 35,
+    image_url: 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Train like a pro with the Adidas training ball. Perfect weight and grip for all weather conditions.'
+  },
+  {
+    id: 28,
+    name: 'Puma Team Backpack',
+    category: 'accessories',
+    price: 59.99,
+    sizes: ['One Size'],
+    stock: 15,
+    image_url: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Carry your gear in style with the Puma Team Backpack. Spacious and durable for training and matches.'
+  },
+  {
+    id: 29,
+    name: 'Nike Dri-FIT Socks (3-pack)',
+    category: 'accessories',
+    price: 24.99,
+    sizes: ['S','M','L'],
+    stock: 50,
+    image_url: 'https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Stay comfortable with Nike Dri-FIT socks. Moisture-wicking technology keeps your feet dry and fresh.'
+  },
+  {
+    id: 30,
+    name: 'Adidas Compression Sleeves',
+    category: 'accessories',
+    price: 34.99,
+    sizes: ['S','M','L'],
+    stock: 30,
+    image_url: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Enhance performance with Adidas compression sleeves. Improved circulation and muscle support.'
   }
 ];
 
@@ -163,7 +313,7 @@ const Products = () => {
   const [sortBy, setSortBy] = useState('name');
 
   useEffect(() => {
-    axios.get(`https://backdoor-cleats.onrender.com/products?category=${category}`)
+    axios.get(`http://localhost:5000/products?category=${category}`)
       .then(response => setProducts(response.data))
       .catch(error => {
         console.error(error);
