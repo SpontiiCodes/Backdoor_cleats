@@ -63,7 +63,7 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/products/${id}`)
+    axios.get(`https://backdoor-cleats.onrender.com/products/${id}`)
       .then(response => setProduct(response.data))
       .catch(error => {
         console.error(error);

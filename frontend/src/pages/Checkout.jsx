@@ -20,7 +20,7 @@ const Checkout = () => {
       return;
     }
     // Create order
-    axios.post('http://localhost:5000/orders', { ...form, items: cart }) // Add cart items
+    axios.post('https://backdoor-cleats.onrender.com/orders', { ...form, items: cart }) // Add cart items
       .then(response => {
         localStorage.removeItem('cart'); // Clear cart
         // Redirect to PayFast
