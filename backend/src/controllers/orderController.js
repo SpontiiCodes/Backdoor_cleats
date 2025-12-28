@@ -35,5 +35,5 @@ function generatePayFastUrl(order, total) {
   const merchantKey = process.env.PAYFAST_MERCHANT_KEY;
   const passphrase = process.env.PAYFAST_PASSPHRASE;
   // Construct URL
-  return `https://www.payfast.co.za/eng/process?merchant_id=${merchantId}&merchant_key=${merchantKey}&amount=${total}&item_name=Order ${order.id}&return_url=http://localhost:3000/success&cancel_url=http://localhost:3000/cart`;
+  return `https://www.payfast.co.za/eng/process?merchant_id=${merchantId}&merchant_key=${merchantKey}&amount=${total}&item_name=Order ${order.id}&return_url=https://backdoor-cleats-1.onrender.com/success&cancel_url=https://backdoor-cleats-1.onrender.com/cart`;
 }
