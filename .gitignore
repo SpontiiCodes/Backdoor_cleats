@@ -2,3 +2,32 @@ node_modules/
 dist/
 .env
 .DS_Store
+
+# Node.js binaries
+frontend/node-v18.19.1-darwin-x64/
+frontend/node.tar.gz
+postgres.tar.gz
+
+# Build outputs
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary files
+*.tmp
+*.temp
