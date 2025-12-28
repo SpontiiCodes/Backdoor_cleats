@@ -20,7 +20,8 @@ const Checkout = () => {
       return;
     }
     // Create order
-    axios.post('https://backdoor-cleats.onrender.com/orders', { ...form, items: cart }) // Add cart items
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    axios.post(`${apiUrl}/orders`, { ...form, items: cart }) // Add cart items
       .then(response => {
         localStorage.removeItem('cart'); // Clear cart
         // Redirect to PayFast

@@ -14,10 +14,12 @@ app.use(express.json());
 const productRoutes = require('./routes/products');
 const orderRoutes = require('./routes/orders');
 const paymentRoutes = require('./routes/payments');
+const uploadRoutes = require('./routes/upload');
 
 app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
 app.use('/payments', paymentRoutes);
+app.use('/api', uploadRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

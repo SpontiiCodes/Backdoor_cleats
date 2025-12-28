@@ -313,7 +313,8 @@ const Products = () => {
   const [sortBy, setSortBy] = useState('name');
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/products?category=${category}`)
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    axios.get(`${apiUrl}/products?category=${category}`)
       .then(response => setProducts(response.data))
       .catch(error => {
         console.error(error);

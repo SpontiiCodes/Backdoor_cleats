@@ -13,6 +13,27 @@ class Product {
     return result.rows[0];
   }
 
+  static async update(id, updates) {
+    const fields = [];
+    const values = [];
+    let paramCount = 1;
+
+    Object.keys(updates).forEach(key => {
+      if (updates[key] !== undefined) {
+        fields.push(`${key} = $${paramCount}`);
+        values.push(updates[key]);
+        paramCount++;
+      }
+    });
+
+    if (fields.length === 0) return null;
+
+    values.push(id);
+    const query = `UPDATE products SET ${fields.join(', ')} WHERE id = $${paramCount} RETURNING *`;
+    const result = await pool.query(query, values);
+    return result.rows[0];
+  }
+
   static async updateStock(id, size, quantity) {
     // Update stock logic
   }

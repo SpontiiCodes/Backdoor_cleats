@@ -19,3 +19,15 @@ exports.getProduct = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.updateProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updates = req.body;
+    const product = await Product.update(id, updates);
+    if (!product) return res.status(404).json({ error: 'Product not found' });
+    res.json(product);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

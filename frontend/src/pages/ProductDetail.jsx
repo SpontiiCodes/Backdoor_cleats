@@ -313,13 +313,14 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/products/${id}`)
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    axios.get(`${apiUrl}/products/${id}`)
       .then(response => setProduct(response.data))
       .catch(error => {
         console.error(error);
         // Use mock data if API fails
         const mockProduct = mockProducts.find(p => p.id === parseInt(id));
-        setProduct(mockProduct);
+        setProduct(mockProduct || null);
       });
   }, [id]);
 
