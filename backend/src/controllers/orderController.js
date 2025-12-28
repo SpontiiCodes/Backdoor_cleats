@@ -1,5 +1,6 @@
 const Order = require('../models/Order');
 const User = require('../models/User');
+const EmailService = require('../services/emailService');
 
 exports.createOrder = async (req, res) => {
   try {
@@ -11,6 +12,15 @@ exports.createOrder = async (req, res) => {
     const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const order = await Order.create({ user_id: user.id, total, status: 'pending' });
     await Order.addItems(order.id, items);
+
+    // Send order confirmation email
+    try {
+      await EmailService.sendOrderConfirmation(order, email, name, items);
+    } catch (emailError) {
+      console.error('Failed to send order confirmation email:', emailError);
+      // Don't fail the order creation if email fails
+    }
+
     // Generate PayFast payment URL
     const paymentUrl = generatePayFastUrl(order, total);
     res.json({ order, paymentUrl });

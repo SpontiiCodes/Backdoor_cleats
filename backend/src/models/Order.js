@@ -23,6 +23,14 @@ class Order {
     const result = await pool.query('SELECT * FROM orders WHERE id = $1', [id]);
     return result.rows[0];
   }
+
+  static async updateStatus(id, status) {
+    const result = await pool.query(
+      'UPDATE orders SET status = $1 WHERE id = $2 RETURNING *',
+      [status, id]
+    );
+    return result.rows[0];
+  }
 }
 
 module.exports = Order;
