@@ -163,7 +163,7 @@ const Products = () => {
   const [sortBy, setSortBy] = useState('name');
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/products?category=${category}`)
+    axios.get(`https://backdoor-cleats.onrender.com/products?category=${category}`)
       .then(response => setProducts(response.data))
       .catch(error => {
         console.error(error);
