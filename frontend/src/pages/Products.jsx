@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ProductCard from '../components/ProductCard';
 import backgroundImage from '../assets/bdc.jpeg';
 
+/* ================= MOCK DATA ================= */
 const mockProducts = [
   {
     id: 1,
@@ -307,65 +308,124 @@ const mockProducts = [
   }
 ];
 
+/* ============================================ */
+
+const categories = ['boots', 'jerseys', 'accessories'];
+
 const Products = () => {
   const { category } = useParams();
+  const navigate = useNavigate();
+
+  // ✅ Default category
+  const activeCategory = category || 'boots';
+
   const [products, setProducts] = useState([]);
   const [sortBy, setSortBy] = useState('name');
 
+  // ✅ Redirect /products → /products/boots
+  useEffect(() => {
+    if (!category) {
+      navigate('/products/boots', { replace: true });
+    }
+  }, [category, navigate]);
+
   useEffect(() => {
     const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-    axios.get(`${apiUrl}/products?category=${category}`)
-      .then(response => setProducts(response.data))
-      .catch(error => {
-        console.error(error);
-        // Use mock data if API fails
-        const filtered = mockProducts.filter(p => p.category === category);
+
+    axios
+      .get(`${apiUrl}/products?category=${activeCategory}`)
+      .then(res => setProducts(res.data))
+      .catch(() => {
+        const filtered = mockProducts.filter(
+          p => p.category === activeCategory
+        );
         setProducts(filtered);
       });
-  }, [category]);
+  }, [activeCategory]);
 
+  /* ================= SORT ================= */
   const sortedProducts = [...products].sort((a, b) => {
     if (sortBy === 'price') return a.price - b.price;
-    if (sortBy === 'name') return a.name.localeCompare(b.name);
-    return 0;
+    return a.name.localeCompare(b.name);
   });
 
-  const categoryImage = category === 'boots' 
-    ? 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=400&q=80'
-    : 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=400&q=80';
+  /* ================= BANNER IMAGE ================= */
+  const categoryImage =
+    activeCategory === 'boots'
+      ? 'https://images.unsplash.com/photo-1574629810360-7efbbe195018'
+      : activeCategory === 'jerseys'
+      ? 'https://images.unsplash.com/photo-1522778119026-d647f0596c20'
+      : 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa';
 
   return (
-    <div 
-      className="min-h-screen bg-gray-900 bg-center bg-no-repeat" 
-      style={{ 
+    <div
+      className="min-h-screen bg-gray-900 bg-center bg-no-repeat"
+      style={{
         backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: '100% 100%'
+        backgroundSize: '100% 100%',
       }}
     >
-      <div className="bg-black bg-opacity-50 min-h-screen">
-        {/* Category Banner */}
-        <div className="relative h-64 bg-cover bg-center" style={{ backgroundImage: `url(${categoryImage})` }}>
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <h1 className="text-5xl font-bold text-white capitalize">{category}</h1>
+      <div className="bg-black bg-opacity-60 min-h-screen">
+
+        {/* ===== CATEGORY BANNER ===== */}
+        <div
+          className="relative h-64 bg-cover bg-center"
+          style={{ backgroundImage: `url(${categoryImage})` }}
+        >
+          <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center">
+            <h1 className="text-5xl font-bold text-white capitalize">
+              {activeCategory}
+            </h1>
           </div>
         </div>
 
         <div className="container mx-auto px-4 py-8 text-white">
-          {/* Sort Options */}
+
+          {/* ===== CATEGORY TABS ===== */}
+          <div className="flex justify-center gap-4 mb-10">
+            {categories.map(cat => (
+              <Link
+                key={cat}
+                to={`/products/${cat}`}
+                className={`px-6 py-2 rounded-full font-semibold transition ${
+                  activeCategory === cat
+                    ? 'bg-white text-black'
+                    : 'bg-gray-700 hover:bg-gray-600'
+                }`}
+              >
+                {cat.toUpperCase()}
+              </Link>
+            ))}
+          </div>
+
+          {/* ===== SORT BAR ===== */}
           <div className="flex justify-between items-center mb-8">
-            <p className="text-lg text-white">{sortedProducts.length} products</p>
-            <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="bg-gray-700 text-white p-2 rounded">
+            <p className="text-lg">
+              {sortedProducts.length} products
+            </p>
+
+            <select
+              value={sortBy}
+              onChange={e => setSortBy(e.target.value)}
+              className="bg-gray-800 text-white p-2 rounded"
+            >
               <option value="name">Sort by Name</option>
               <option value="price">Sort by Price</option>
             </select>
           </div>
 
-          {/* Product Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {sortedProducts.map(product => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+          {/* ===== PRODUCTS GRID ===== */}
+          {sortedProducts.length === 0 ? (
+            <p className="text-center text-gray-300">
+              No products available.
+            </p>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              {sortedProducts.map(product => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
