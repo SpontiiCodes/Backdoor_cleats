@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
 import Home from './pages/Home';
 import About from './pages/About';
 import Products from './pages/Products';
@@ -14,16 +13,6 @@ import Footer from './components/Footer';
 function AppContent() {
   const navigate = useNavigate();
   const location = useLocation();
-
-  useEffect(() => {
-    // Handle redirects from 404.html
-    const urlParams = new URLSearchParams(location.search);
-    const redirect = urlParams.get('redirect');
-    if (redirect) {
-      // Remove the redirect parameter and navigate to the actual path
-      navigate(redirect, { replace: true });
-    }
-  }, [location, navigate]);
 
   return (
     <>
