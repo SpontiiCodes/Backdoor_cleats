@@ -3,6 +3,8 @@ import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 
 const Admin = () => {
+  console.log('🚀 Admin component rendering');
+
   const [searchParams] = useSearchParams();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginData, setLoginData] = useState({ email: '', password: '' });
@@ -13,6 +15,9 @@ const Admin = () => {
   const [activeTab, setActiveTab] = useState('products');
   const [dashboardStats, setDashboardStats] = useState(null);
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
   // Debug logging
@@ -20,6 +25,8 @@ const Admin = () => {
   console.log('🔑 Secret key:', searchParams.get('key'));
   console.log('🔗 API URL:', apiUrl);
   console.log('🔐 Is logged in:', isLoggedIn);
+  console.log('❌ Error:', error);
+  console.log('⏳ Loading:', loading);
 
   useEffect(() => {
     console.log('🔄 Admin useEffect triggered');
@@ -44,18 +51,24 @@ const Admin = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError(null);
     try {
       console.log('🔐 Attempting login with:', loginData);
       const response = await axios.post(`${apiUrl}/admin/login`, loginData);
       localStorage.setItem('adminToken', response.data.token);
       setIsLoggedIn(true);
       console.log('✅ Login successful');
-      fetchDashboardData();
-      fetchProducts();
-      fetchOrders();
+      await Promise.all([
+        fetchDashboardData(),
+        fetchProducts(),
+        fetchOrders()
+      ]);
     } catch (error) {
       console.error('❌ Login failed:', error.response?.data?.error || error.message);
-      alert('Login failed: ' + (error.response?.data?.error || 'Unknown error'));
+      setError('Login failed: ' + (error.response?.data?.error || error.message));
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -117,10 +130,14 @@ const Admin = () => {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchProducts();
-      alert('Product updated successfully!');
+      console.log('✅ Product updated successfully:', updates);
+      // Show temporary success message
+      setError(null);
+      setTimeout(() => setError('Product updated successfully!'), 100);
+      setTimeout(() => setError(null), 3000);
     } catch (error) {
-      console.error('Failed to update product:', error);
-      alert('Failed to update product');
+      console.error('❌ Failed to update product:', error);
+      setError('Failed to update product: ' + (error.response?.data?.error || error.message));
     }
   };
 
@@ -143,10 +160,13 @@ const Admin = () => {
 
       fetchProducts();
       setSelectedProduct(null);
-      alert('Image uploaded successfully!');
+      console.log('✅ Image uploaded successfully for product:', productId);
+      setError(null);
+      setTimeout(() => setError('Image uploaded successfully!'), 100);
+      setTimeout(() => setError(null), 3000);
     } catch (error) {
-      console.error('Failed to upload image:', error);
-      alert('Failed to upload image');
+      console.error('❌ Failed to upload image:', error);
+      setError('Failed to upload image: ' + (error.response?.data?.error || error.message));
     } finally {
       setUploading(false);
     }
@@ -159,23 +179,36 @@ const Admin = () => {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchOrders();
-      alert('Order status updated successfully!');
+      console.log('✅ Order status updated successfully:', orderId, status);
+      setError(null);
+      setTimeout(() => setError(`Order #${orderId} status updated to ${status}!`), 100);
+      setTimeout(() => setError(null), 3000);
     } catch (error) {
-      console.error('Failed to update order status:', error);
-      alert('Failed to update order status');
+      console.error('❌ Failed to update order status:', error);
+      setError('Failed to update order status: ' + (error.response?.data?.error || error.message));
     }
   };
 
   if (!isLoggedIn) {
+    console.log('🔒 Showing login form');
     return (
       <div className="min-h-screen bg-gray-900 flex items-center justify-center text-white">
         <div className="bg-gray-800 p-8 rounded-lg w-full max-w-md">
           <h1 className="text-2xl font-bold mb-6 text-center">🔧 Admin Login</h1>
+          
+          {error && (
+            <div className="mb-4 p-3 bg-red-600 rounded text-sm">
+              {error}
+            </div>
+          )}
+          
           <div className="mb-4 p-3 bg-blue-900 rounded text-sm">
             <strong>Debug Info:</strong><br/>
             API: {apiUrl}<br/>
-            Key: {searchParams.get('key') || 'None'}
+            Key: {searchParams.get('key') || 'None'}<br/>
+            Loading: {loading ? 'Yes' : 'No'}
           </div>
+          
           <form onSubmit={handleLogin}>
             <div className="mb-4">
               <label className="block text-sm font-medium mb-2">Email</label>
@@ -185,6 +218,7 @@ const Admin = () => {
                 onChange={(e) => setLoginData({...loginData, email: e.target.value})}
                 className="w-full p-2 bg-gray-700 rounded"
                 required
+                disabled={loading}
               />
             </div>
             <div className="mb-6">
@@ -195,12 +229,18 @@ const Admin = () => {
                 onChange={(e) => setLoginData({...loginData, password: e.target.value})}
                 className="w-full p-2 bg-gray-700 rounded"
                 required
+                disabled={loading}
               />
             </div>
-            <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 py-2 rounded font-bold">
-              Login
+            <button 
+              type="submit" 
+              className="w-full bg-blue-600 hover:bg-blue-700 py-2 rounded font-bold disabled:opacity-50"
+              disabled={loading}
+            >
+              {loading ? 'Logging in...' : 'Login'}
             </button>
           </form>
+          
           <div className="mt-4 text-sm text-gray-400 text-center">
             Default: admin@backdoorcleats.com / admin123
           </div>
@@ -212,6 +252,7 @@ const Admin = () => {
     );
   }
 
+  console.log('📊 Showing dashboard');
   return (
     <div className="min-h-screen bg-gray-900 text-white p-8">
       <div className="max-w-7xl mx-auto">
@@ -224,6 +265,18 @@ const Admin = () => {
             Logout
           </button>
         </div>
+
+        {error && (
+          <div className="mb-4 p-4 bg-red-600 rounded">
+            <strong>Error:</strong> {error}
+          </div>
+        )}
+
+        {loading && (
+          <div className="mb-4 p-4 bg-blue-600 rounded">
+            Loading dashboard data...
+          </div>
+        )}
 
         {/* Dashboard Stats */}
         {dashboardStats && (
@@ -269,8 +322,10 @@ const Admin = () => {
         {activeTab === 'products' && (
           <div>
             <h2 className="text-2xl font-bold mb-6">Product Management</h2>
+            {loading && <p className="text-blue-400 mb-4">Loading products...</p>}
+            {error && <p className="text-red-400 mb-4">Error loading products: {error}</p>}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {products.map(product => (
+              {products.length > 0 ? products.map(product => (
                 <div key={product.id} className="bg-gray-800 rounded-lg p-4">
                   <img
                     src={product.image_url.startsWith('http') ? product.image_url : `${apiUrl}${product.image_url}`}
@@ -279,8 +334,40 @@ const Admin = () => {
                   />
                   <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
                   <p className="text-gray-400 mb-2">{product.category}</p>
-                  <p className="text-green-400 font-bold mb-4">R{product.price}</p>
-                  <p className="text-sm text-gray-400 mb-4">Stock: {product.stock}</p>
+                  
+                  {/* Editable Price */}
+                  <div className="mb-4">
+                    <label className="block text-sm text-gray-400 mb-1">Price (R)</label>
+                    <input
+                      type="number"
+                      defaultValue={product.price}
+                      onBlur={(e) => {
+                        const newPrice = parseFloat(e.target.value);
+                        if (newPrice !== product.price && !isNaN(newPrice)) {
+                          updateProduct(product.id, { price: newPrice });
+                        }
+                      }}
+                      className="w-full p-2 bg-gray-700 rounded text-green-400 font-bold"
+                      step="0.01"
+                    />
+                  </div>
+                  
+                  {/* Editable Stock */}
+                  <div className="mb-4">
+                    <label className="block text-sm text-gray-400 mb-1">Stock</label>
+                    <input
+                      type="number"
+                      defaultValue={product.stock}
+                      onBlur={(e) => {
+                        const newStock = parseInt(e.target.value);
+                        if (newStock !== product.stock && !isNaN(newStock)) {
+                          updateProduct(product.id, { stock: newStock });
+                        }
+                      }}
+                      className="w-full p-2 bg-gray-700 rounded"
+                      min="0"
+                    />
+                  </div>
 
                   <input
                     type="file"
@@ -291,15 +378,18 @@ const Admin = () => {
                     }}
                     className="hidden"
                     id={`file-${product.id}`}
+                    disabled={uploading}
                   />
                   <label
                     htmlFor={`file-${product.id}`}
-                    className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded cursor-pointer block text-center mb-2"
+                    className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded cursor-pointer block text-center mb-2 disabled:opacity-50"
                   >
-                    Upload New Image
+                    {uploading ? 'Uploading...' : 'Upload New Image'}
                   </label>
                 </div>
-              ))}
+              )) : (
+                !loading && <p>No products found.</p>
+              )}
             </div>
           </div>
         )}
@@ -308,8 +398,10 @@ const Admin = () => {
         {activeTab === 'orders' && (
           <div>
             <h2 className="text-2xl font-bold mb-6">Order Management</h2>
+            {loading && <p className="text-blue-400 mb-4">Loading orders...</p>}
+            {error && <p className="text-red-400 mb-4">Error loading orders: {error}</p>}
             <div className="space-y-4">
-              {orders.map(order => (
+              {orders.length > 0 ? orders.map(order => (
                 <div key={order.id} className="bg-gray-800 rounded-lg p-6">
                   <div className="flex justify-between items-start mb-4">
                     <div>
@@ -343,7 +435,9 @@ const Admin = () => {
                     ))}
                   </div>
                 </div>
-              ))}
+              )) : (
+                !loading && <p>No orders found.</p>
+              )}
             </div>
           </div>
         )}

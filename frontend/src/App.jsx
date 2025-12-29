@@ -31,6 +31,7 @@ function AppContent() {
       <div className="min-h-screen flex flex-col">
         <main className="flex-grow">
           <Routes>
+            {/* Public Routes */}
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/products" element={<Products />} />
@@ -39,6 +40,8 @@ function AppContent() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/success" element={<Success />} />
+            
+            {/* Hidden Admin Route - Not in navigation, accessed via direct URL or secret key */}
             <Route path="/admin" element={<Admin />} />
           </Routes>
         </main>
