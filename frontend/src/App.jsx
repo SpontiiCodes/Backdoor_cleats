@@ -11,6 +11,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 function App() {
+  console.log('App component rendered, current path:', window.location.pathname);
   return (
     <Router>
       <Header />
@@ -26,6 +27,7 @@ function App() {
             <Route path="/success" element={<Success />} />
             {/* Hidden admin route - access via /admin?key=staff2025 */}
             <Route path="/admin" element={<Admin />} />
+            <Route path="*" element={<div>404 - Route not found: {window.location.pathname}</div>} />
           </Routes>
         </main>
         <Footer />
