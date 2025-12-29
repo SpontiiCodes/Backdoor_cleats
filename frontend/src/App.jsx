@@ -24,6 +24,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/success" element={<Success />} />
+            {/* Hidden admin route - access via /admin?key=staff2025 */}
             <Route path="/admin" element={<Admin />} />
           </Routes>
         </main>

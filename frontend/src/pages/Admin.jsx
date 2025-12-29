@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 
 const Admin = () => {
+  const [searchParams] = useSearchParams();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [products, setProducts] = useState([]);
@@ -14,6 +16,18 @@ const Admin = () => {
   const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
+    // Check for secret key access
+    const secretKey = searchParams.get('key');
+    if (secretKey === 'staff2025') {
+      // Allow direct access with secret key
+      setIsLoggedIn(true);
+      fetchDashboardData();
+      fetchProducts();
+      fetchOrders();
+      return;
+    }
+
+    // Normal token-based authentication
     const token = localStorage.getItem('adminToken');
     if (token) {
       setIsLoggedIn(true);
@@ -21,7 +35,7 @@ const Admin = () => {
       fetchProducts();
       fetchOrders();
     }
-  }, []);
+  }, [searchParams]);
 
   const handleLogin = async (e) => {
     e.preventDefault();

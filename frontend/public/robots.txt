@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://backdoor-cleats-1.onrender.com/sitemap.xml
+Sitemap: https://backdoor-cleats.onrender.com/sitemap.xml
