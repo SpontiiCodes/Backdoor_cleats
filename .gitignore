@@ -1,6 +1,6 @@
 node_modules/
 dist/
-.env
+# .env  # Temporarily commented out to deploy API URL fix
 .DS_Store
 
 # Node.js binaries
