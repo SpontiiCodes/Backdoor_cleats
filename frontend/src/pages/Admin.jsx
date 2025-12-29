@@ -15,10 +15,16 @@ const Admin = () => {
 
   const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
+  // Debug: Show that component is loading
+  console.log('Admin component loaded, apiUrl:', apiUrl);
+  console.log('Search params:', searchParams.get('key'));
+
   useEffect(() => {
     // Check for secret key access
     const secretKey = searchParams.get('key');
+    console.log('Secret key:', secretKey);
     if (secretKey === 'staff2025') {
+      console.log('Secret key matched, allowing access');
       // Allow direct access with secret key
       setIsLoggedIn(true);
       fetchDashboardData();
@@ -146,6 +152,9 @@ const Admin = () => {
     return (
       <div className="min-h-screen bg-gray-900 flex items-center justify-center text-white">
         <div className="bg-gray-800 p-8 rounded-lg w-full max-w-md">
+          <div className="mb-4 p-4 bg-blue-600 rounded">
+            <strong>DEBUG:</strong> Admin component is working! API URL: {apiUrl}
+          </div>
           <h1 className="text-2xl font-bold mb-6 text-center">Admin Login</h1>
           <form onSubmit={handleLogin}>
             <div className="mb-4">
