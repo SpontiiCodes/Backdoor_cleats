@@ -314,14 +314,12 @@ const Products = () => {
 
   useEffect(() => {
     const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-    // If no category specified, fetch all products
-    const url = category ? `${apiUrl}/products?category=${category}` : `${apiUrl}/products`;
-    axios.get(url)
+    axios.get(`${apiUrl}/products?category=${category}`)
       .then(response => setProducts(response.data))
       .catch(error => {
         console.error(error);
         // Use mock data if API fails
-        const filtered = category ? mockProducts.filter(p => p.category === category) : mockProducts;
+        const filtered = mockProducts.filter(p => p.category === category);
         setProducts(filtered);
       });
   }, [category]);
