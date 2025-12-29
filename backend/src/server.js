@@ -24,8 +24,8 @@ app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
 app.use('/payments', paymentRoutes);
 app.use('/api', uploadRoutes);
-app.use('/admin', adminRoutes);
-app.use('/admin/dashboard', adminDashboardRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/admin/dashboard', adminDashboardRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {

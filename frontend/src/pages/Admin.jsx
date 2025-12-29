@@ -46,7 +46,7 @@ const Admin = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${apiUrl}/admin/login`, loginData);
+      const response = await axios.post(`${apiUrl}/api/admin/login`, loginData);
       localStorage.setItem('adminToken', response.data.token);
       setIsLoggedIn(true);
       fetchDashboardData();
@@ -68,7 +68,7 @@ const Admin = () => {
   const fetchDashboardData = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await axios.get(`${apiUrl}/admin/dashboard`, {
+      const response = await axios.get(`${apiUrl}/api/admin/dashboard`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setDashboardStats(response.data);
@@ -80,7 +80,7 @@ const Admin = () => {
   const fetchProducts = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await axios.get(`${apiUrl}/admin/dashboard/products`, {
+      const response = await axios.get(`${apiUrl}/api/admin/dashboard/products`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setProducts(response.data);
@@ -92,7 +92,7 @@ const Admin = () => {
   const fetchOrders = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await axios.get(`${apiUrl}/admin/dashboard/orders`, {
+      const response = await axios.get(`${apiUrl}/api/admin/dashboard/orders`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setOrders(response.data);
@@ -117,7 +117,7 @@ const Admin = () => {
       });
 
       // Update product with new image URL
-      await axios.put(`${apiUrl}/admin/dashboard/products/${selectedProduct.id}`, {
+      await axios.put(`${apiUrl}/api/admin/dashboard/products/${selectedProduct.id}`, {
         image_url: uploadResponse.data.imageUrl
       }, {
         headers: { Authorization: `Bearer ${token}` }
@@ -138,7 +138,7 @@ const Admin = () => {
   const updateOrderStatus = async (orderId, status) => {
     try {
       const token = localStorage.getItem('adminToken');
-      await axios.put(`${apiUrl}/admin/dashboard/orders/${orderId}/status`, { status }, {
+      await axios.put(`${apiUrl}/api/admin/dashboard/orders/${orderId}/status`, { status }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchOrders();
