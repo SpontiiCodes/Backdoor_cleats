@@ -1,0 +1,9 @@
+# Render Static Site Configuration
+# Build Command
+npm run build
+
+# Publish Directory
+dist
+
+# Node Version
+18.19.1
