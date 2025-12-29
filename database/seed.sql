@@ -1,3 +1,7 @@
+-- Insert default admin user
+INSERT INTO admins (email, password, name, role) VALUES
+('admin@backdoorcleats.com', '$2b$10$/sOPEQEinbAFQYWEux4cTOiFmNnkQPYvJfSTBjTxMLZTYb6KV7jbS', 'Admin User', 'admin');
+
 INSERT INTO products (name, category, price, sizes, stock, image_url, description) VALUES
 ('Nike Mercurial Superfly 9 Elite', 'boots', 299.99, ARRAY['7','8','9','10','11'], 20, 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80', 'Experience unparalleled speed and agility with the Nike Mercurial Superfly 9 Elite. Designed for elite players who demand the best in performance and style.'),
 ('Adidas Predator Accuracy+', 'boots', 249.99, ARRAY['7','8','9','10','11'], 15, 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80', 'Control the game with precision. The Adidas Predator Accuracy+ features innovative technology for superior ball control and power.'),

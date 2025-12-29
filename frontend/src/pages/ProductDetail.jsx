@@ -366,7 +366,7 @@ const ProductDetail = () => {
               </div>
               <div className="md:w-1/2 p-8">
                 <h1 className="text-4xl font-bold mb-4 text-black">{product.name}</h1>
-                <p className="text-3xl font-semibold mb-4 text-gray-700">${product.price}</p>
+                <p className="text-3xl font-semibold mb-4 text-gray-700">R{product.price}</p>
                 <p className="mb-6 text-gray-600">{product.description}</p>
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 mb-2">Size</label>

@@ -49,7 +49,7 @@ const Cart = () => {
                       <div>
                         <h2 className="text-xl text-white">{item.name}</h2>
                         <p className="text-white">Size: {item.size}</p>
-                        <p className="text-white">${item.price}</p>
+                        <p className="text-white">R{item.price}</p>
                         <input type="number" value={item.quantity} onChange={(e) => updateQuantity(index, parseInt(e.target.value))} className="bg-gray-700 text-white p-2 rounded w-20" min="1" />
                       </div>
                     </div>
@@ -58,7 +58,7 @@ const Cart = () => {
                 ))}
               </div>
               <div className="mt-8 text-right">
-                <p className="text-2xl text-white">Total: ${total.toFixed(2)}</p>
+                <p className="text-2xl text-white">Total: R{total.toFixed(2)}</p>
                 <Link to="/checkout" className="bg-neon-green text-black px-6 py-3 rounded font-bold hover:bg-green-400 transition inline-block mt-4">Checkout</Link>
               </div>
             </>

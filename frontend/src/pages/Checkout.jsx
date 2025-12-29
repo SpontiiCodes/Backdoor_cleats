@@ -52,10 +52,10 @@ const Checkout = () => {
               {cart.map((item, index) => (
                 <div key={index} className="bg-gray-800 p-4 rounded mb-4">
                   <p className="text-white">{item.name} (Size: {item.size}) x {item.quantity}</p>
-                  <p className="text-white">${(item.price * item.quantity).toFixed(2)}</p>
+                  <p className="text-white">R{(item.price * item.quantity).toFixed(2)}</p>
                 </div>
               ))}
-              <p className="text-xl font-bold text-white">Total: ${total.toFixed(2)}</p>
+              <p className="text-xl font-bold text-white">Total: R{total.toFixed(2)}</p>
             </div>
             <div>
               <form onSubmit={handleSubmit} className="max-w-md">
