@@ -27,7 +27,7 @@ function AppContent() {
 
   return (
     <>
-      <Header />
+      {location.pathname !== '/admin' && <Header />}
       <div className="min-h-screen flex flex-col">
         <main className="flex-grow">
           <Routes>
@@ -45,7 +45,7 @@ function AppContent() {
             <Route path="/admin" element={<Admin />} />
           </Routes>
         </main>
-        <Footer />
+        {location.pathname !== '/admin' && <Footer />}
       </div>
     </>
   );
