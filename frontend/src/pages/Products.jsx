@@ -314,12 +314,19 @@ const Products = () => {
 
   useEffect(() => {
     const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-    axios.get(`${apiUrl}/products?category=${category}`)
+    // If no category, fetch all products; otherwise fetch by category
+    const url = category 
+      ? `${apiUrl}/products?category=${category}`
+      : `${apiUrl}/products`;
+    
+    axios.get(url)
       .then(response => setProducts(response.data))
       .catch(error => {
         console.error(error);
         // Use mock data if API fails
-        const filtered = mockProducts.filter(p => p.category === category);
+        const filtered = category 
+          ? mockProducts.filter(p => p.category === category)
+          : mockProducts;
         setProducts(filtered);
       });
   }, [category]);
@@ -334,6 +341,8 @@ const Products = () => {
     ? 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=400&q=80'
     : 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=400&q=80';
 
+  const pageTitle = category ? category.charAt(0).toUpperCase() + category.slice(1) : 'All Products';
+
   return (
     <div 
       className="min-h-screen bg-gray-900 bg-center bg-no-repeat" 
@@ -346,7 +355,7 @@ const Products = () => {
         {/* Category Banner */}
         <div className="relative h-64 bg-cover bg-center" style={{ backgroundImage: `url(${categoryImage})` }}>
           <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <h1 className="text-5xl font-bold text-white capitalize">{category}</h1>
+            <h1 className="text-5xl font-bold text-white">{pageTitle}</h1>
           </div>
         </div>
 
