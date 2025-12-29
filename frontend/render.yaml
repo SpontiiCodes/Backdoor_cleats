@@ -7,9 +7,3 @@ dist
 
 # Node Version
 18.19.1
-
-# Redirects for SPA routing
-redirects:
-  - from: /*
-    to: /
-    status: 200
