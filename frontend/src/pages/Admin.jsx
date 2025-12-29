@@ -15,15 +15,17 @@ const Admin = () => {
 
   const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
+  // Debug logging
+  console.log('Admin component rendered, isLoggedIn:', isLoggedIn);
+  console.log('Search params:', searchParams.get('key'));
+
   useEffect(() => {
     // Check for secret key access
     const secretKey = searchParams.get('key');
     if (secretKey === 'staff2025') {
       // Allow direct access with secret key
       setIsLoggedIn(true);
-      fetchDashboardData();
-      fetchProducts();
-      fetchOrders();
+      // Don't fetch data immediately - user can login properly for full access
       return;
     }
 
@@ -62,36 +64,45 @@ const Admin = () => {
   const fetchDashboardData = async () => {
     try {
       const token = localStorage.getItem('adminToken');
+      if (!token) return; // Skip if no token
+
       const response = await axios.get(`${apiUrl}/admin/dashboard`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setDashboardStats(response.data);
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
+      // Don't show alert for background API calls
     }
   };
 
   const fetchProducts = async () => {
     try {
       const token = localStorage.getItem('adminToken');
+      if (!token) return; // Skip if no token
+
       const response = await axios.get(`${apiUrl}/admin/dashboard/products`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setProducts(response.data);
     } catch (error) {
       console.error('Error fetching products:', error);
+      // Don't show alert for background API calls
     }
   };
 
   const fetchOrders = async () => {
     try {
       const token = localStorage.getItem('adminToken');
+      if (!token) return; // Skip if no token
+
       const response = await axios.get(`${apiUrl}/admin/dashboard/orders`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setOrders(response.data);
     } catch (error) {
       console.error('Error fetching orders:', error);
+      // Don't show alert for background API calls
     }
   };
 
@@ -147,6 +158,9 @@ const Admin = () => {
       <div className="min-h-screen bg-gray-900 flex items-center justify-center text-white">
         <div className="bg-gray-800 p-8 rounded-lg w-full max-w-md">
           <h1 className="text-2xl font-bold mb-6 text-center">Admin Login</h1>
+          <p className="text-center text-gray-400 mb-4">
+            Access the Backdoor Cleats Admin Dashboard
+          </p>
           <form onSubmit={handleLogin}>
             <div className="mb-4">
               <label className="block text-sm font-medium mb-2">Email</label>
@@ -174,6 +188,9 @@ const Admin = () => {
           </form>
           <div className="mt-4 text-sm text-gray-400 text-center">
             Default login: admin@backdoorcleats.com / admin123
+          </div>
+          <div className="mt-4 text-xs text-gray-500 text-center">
+            Quick access: /admin?key=staff2025
           </div>
         </div>
       </div>
