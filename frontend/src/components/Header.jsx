@@ -17,9 +17,7 @@ const Header = () => {
         <nav className="hidden md:flex space-x-6">
           <Link to="/" className="hover:text-black transition">Home</Link>
           <Link to="/about" className="hover:text-black transition">About</Link>
-          <Link to="/products/boots" className="hover:text-black transition">Boots</Link>
-          <Link to="/products/jerseys" className="hover:text-black transition">Jerseys</Link>
-          <Link to="/products/accessories" className="hover:text-black transition">Accessories</Link>
+          <Link to="/products" className="hover:text-black transition">Products</Link>
           <Link to="/cart" className="hover:text-black transition">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5H19M7 13v8a2 2 0 002 2h10a2 2 0 002-2v-3" />
@@ -37,9 +35,7 @@ const Header = () => {
           <div className="container mx-auto px-4 flex flex-col space-y-2">
             <Link to="/" className="hover:text-black transition" onClick={() => setIsOpen(false)}>Home</Link>
             <Link to="/about" className="hover:text-black transition" onClick={() => setIsOpen(false)}>About</Link>
-            <Link to="/products/boots" className="hover:text-black transition" onClick={() => setIsOpen(false)}>Boots</Link>
-            <Link to="/products/jerseys" className="hover:text-black transition" onClick={() => setIsOpen(false)}>Jerseys</Link>
-            <Link to="/products/accessories" className="hover:text-black transition" onClick={() => setIsOpen(false)}>Accessories</Link>
+            <Link to="/products" className="hover:text-black transition" onClick={() => setIsOpen(false)}>Products</Link>
             <Link to="/cart" className="hover:text-black transition" onClick={() => setIsOpen(false)}>
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5H19M7 13v8a2 2 0 002 2h10a2 2 0 002-2v-3" />
