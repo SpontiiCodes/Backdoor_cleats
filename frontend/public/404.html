@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Backdoor Cleats</title>
   <script>
-    // Handle SPA routing for all routes
-    var path = window.location.pathname;
-    var search = window.location.search;
-    var hash = window.location.hash;
-
-    // Redirect to index.html with the current path as a query parameter
-    // This allows React Router to handle the routing
-    var newUrl = window.location.origin + '/?redirect=' + encodeURIComponent(path + search + hash);
-    window.location.replace(newUrl);
+    // Redirect to index.html for SPA routing
+    var pathSegmentsToKeep = 0;
+    var l = window.location;
+    l.replace(
+      l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+      l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+      l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+      (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+      l.hash
+    );
   </script>
 </head>
 <body>
-  <p>Redirecting...</p>
 </body>
 </html>

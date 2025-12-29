@@ -17,7 +17,6 @@ const Header = () => {
         <nav className="hidden md:flex space-x-6">
           <Link to="/" className="hover:text-black transition">Home</Link>
           <Link to="/about" className="hover:text-black transition">About</Link>
-          <Link to="/products" className="hover:text-black transition">Products</Link>
           <Link to="/products/boots" className="hover:text-black transition">Boots</Link>
           <Link to="/products/jerseys" className="hover:text-black transition">Jerseys</Link>
           <Link to="/products/accessories" className="hover:text-black transition">Accessories</Link>
@@ -38,7 +37,6 @@ const Header = () => {
           <div className="container mx-auto px-4 flex flex-col space-y-2">
             <Link to="/" className="hover:text-black transition" onClick={() => setIsOpen(false)}>Home</Link>
             <Link to="/about" className="hover:text-black transition" onClick={() => setIsOpen(false)}>About</Link>
-            <Link to="/products" className="hover:text-black transition" onClick={() => setIsOpen(false)}>Products</Link>
             <Link to="/products/boots" className="hover:text-black transition" onClick={() => setIsOpen(false)}>Boots</Link>
             <Link to="/products/jerseys" className="hover:text-black transition" onClick={() => setIsOpen(false)}>Jerseys</Link>
             <Link to="/products/accessories" className="hover:text-black transition" onClick={() => setIsOpen(false)}>Accessories</Link>
